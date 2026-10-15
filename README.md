@@ -6,6 +6,9 @@ situations communes. L’hôte valide la liste des propositions puis lance la pa
 chaque joueur reçoit une grille aléatoire. Quand une ligne, une colonne ou une
 diagonale est complète, un énorme **BINGO!** explose à l’écran de tout le monde.
 
+> ⚠️ **Projet 100 % vibecodé.** Aucune review : je n’ai aucune idée de ce à
+> quoi ressemble le code. C’est marrant, ça fonctionne, et donc je m’en fiche.
+
 ## Stack
 
 - **Backend** : Go (stdlib `net/http`, routeur 1.22+), WebSocket
