@@ -1,0 +1,9 @@
+.git
+.agents
+.codex
+.aws
+bin/
+**/*.db
+**/*.db-wal
+**/*.db-shm
+design/

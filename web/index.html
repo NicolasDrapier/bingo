@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BINGO!</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header id="topbar" class="hidden">
+    <div id="logo-slot" class="logo"></div>
+    <div id="game-meta"></div>
+  </header>
+
+  <main>
+    
+    <section id="screen-home" class="screen">
+      <div class="home-cover">
+        <div class="cover-copy">
+          <span class="issue-label">LE BINGO ENTRE POTES</span>
+          <div id="home-logo" class="logo logo-big"></div>
+          <h1>Ta grille. Tes potes. <span>BINGO!</span></h1>
+          <p>Propose des idées, reçois ta grille, coche ce qui arrive.</p>
+          <p class="cover-caption">Une ligne complète ? Fais exploser le BINGO !</p>
+        </div>
+        <img class="mascot mascot-welcome" src="/assets/mascot-welcome.png" alt="" width="1254" height="1254" fetchpriority="high">
+      </div>
+      <div class="panels">
+        <form id="form-create" class="panel">
+          <h2 class="panel-tag">Créer une partie</h2>
+          <label>Nom de la partie
+            <input name="name" maxlength="20" required placeholder="Bingo du vendredi">
+          </label>
+          <label>Ton pseudo
+            <input name="player" maxlength="20" required placeholder="Mimi">
+          </label>
+          <label>Taille de la grille
+            <select name="size">
+              <option value="3">3 × 3</option>
+              <option value="4">4 × 4</option>
+              <option value="5" selected>5 × 5</option>
+            </select>
+          </label>
+          <label class="chk"><input type="checkbox" name="free" checked> Case centrale gratuite</label>
+          <button class="btn btn-pow" type="submit">CRÉER&nbsp;!</button>
+        </form>
+        <form id="form-join" class="panel">
+          <h2 class="panel-tag tag-blue">Rejoindre</h2>
+          <label>Code de la partie
+            <input name="code" maxlength="4" required pattern="[A-Za-z0-9]{4}" placeholder="K7QX" class="code" autocomplete="off">
+          </label>
+          <label>Ton pseudo
+            <input name="player" maxlength="20" required placeholder="Ziggy">
+          </label>
+          <button class="btn btn-blue" type="submit">REJOINDRE&nbsp;!</button>
+        </form>
+      </div>
+      <p id="home-error" class="error" role="alert"></p>
+    </section>
+
+    
+    <section id="screen-lobby" class="screen hidden">
+      <div class="layout">
+        <div class="panel">
+          <h2 class="panel-tag">Vos propositions</h2>
+          <p class="hint">Tout le monde propose. L’hôte valide la liste, puis chacun reçoit une grille aléatoire.</p>
+          <form id="form-proposal" class="proposal-form">
+            <label for="proposal-label">Une situation à mettre dans le bingo</label>
+            <input id="proposal-label" name="label" maxlength="40" required placeholder="Quelqu’un dit « on se fait un point ? »">
+            <button class="btn" type="submit">PROPOSER !</button>
+          </form>
+          <p id="proposal-progress" role="status"></p>
+          <ul id="proposals" class="proposal-list"></ul>
+        </div>
+          <p id="lobby-hint" class="hint">Remplis tes cases (40 caractères max), puis passe «&nbsp;Prêt&nbsp;».</p>
+        </div>
+        <div class="panel">
+          <h2>Joueurs</h2>
+          <div class="lobby-companion"><img class="mascot" src="/assets/mascot-waiting.png" alt="" width="1254" height="1254"><p class="speech-bubble">À vous de proposer !</p></div>
+          <p id="start-hint" class="hint"></p>
+          <ul id="players" class="players"></ul>
+          <button id="btn-start" class="btn btn-pow hidden" type="button">VALIDER LA LISTE ET JOUER !</button>
+        </div>
+      </div>
+    </section>
+
+    
+    <section id="screen-game" class="screen hidden">
+      <div class="layout">
+        <div class="panel">
+          <h2>Ta grille</h2>
+          <div id="game-grid" class="grid grid-play"></div>
+          <p class="hint">Touche une case pour la cocher / décocher.</p>
+        </div>
+        <div class="panel">
+          <div class="game-companion"><img class="mascot" src="/assets/mascot-welcome.png" alt="La mascotte du bingo vous encourage" width="1254" height="1254"><p class="speech-bubble">À toi de jouer !</p></div>
+          <h2>Classement</h2>
+          <ol id="ranking" class="ranking"></ol>
+          <h2>Joueurs</h2>
+          <ul id="players-game" class="players"></ul>
+          <button id="btn-finish" class="btn hidden" type="button">TERMINER&nbsp;LA&nbsp;PARTIE</button>
+        </div>
+      </div>
+    </section>
+
+    
+    <section id="screen-finished" class="screen hidden">
+      <h1 id="final-title" class="comic-title">PARTIE TERMINÉE&nbsp;!</h1>
+      <img class="mascot mascot-victory" src="/assets/mascot-victory.png" alt="" width="1254" height="1254">
+      <ol id="final-ranking" class="ranking ranking-big panel-inline"></ol>
+      <div id="final-grids"></div>
+      <button id="btn-new-game" class="btn" type="button">NOUVELLE&nbsp;PARTIE</button>
+    </section>
+  </main>
+
+  
+  <div id="bingo-overlay" class="hidden" aria-live="assertive">
+    <div class="speedlines" aria-hidden="true"></div>
+    <div id="bingo-star-slot" aria-hidden="true"><img src="/assets/bingo-burst.png" alt="" width="1536" height="1024"></div>
+    <div id="bingo-text">BINGO!</div>
+    <div id="bingo-winner"></div>
+    <button id="btn-dismiss-bingo" class="btn" type="button">CONTINUER</button>
+  </div>
+
+  <div id="go-effect" class="hidden" aria-hidden="true">GO!</div>
+  <div id="toast" class="hidden" role="status"></div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

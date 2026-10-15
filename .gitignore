@@ -1,0 +1,12 @@
+/bin/
+*.db
+*.db-wal
+*.db-shm
+.env
+.env.*
+!.env.example
+/.aws/
+/.agents/
+/.codex/
+*.pem
+*.key
